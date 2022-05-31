@@ -25,7 +25,7 @@ public class UserBean {
 	private UploadedFile image;
 
 	public String save() {
-		user.setImagePath(UploadService.write(image, "setups"));
+		user.setImagePath(UploadService.write(image, "users"));
 		dao.create(user);
 		return "users";
 	}
