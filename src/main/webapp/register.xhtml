@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="content">
+			<h:form enctype="multipart/form-data">
+		    	<p:card style="width: 25em; margin: 1em auto">
+					<f:facet name="title">
+	       				Novo Visitante
+	    			</f:facet>
+					<div class="ui-fluid">
+					    <div class="p-field">
+							<label for="name">Nome</label>
+							<p:inputText 
+								id="name" 
+								type="text" 
+								value="#{userBean.user.name}"
+								required="true" 
+								requiredMessage="O campo do nome é obrigatório"
+								validatorMessage="O nome tem que ter pelo menos uma letra"
+							>
+								<f:validateLength minimum="1" />
+								<f:ajax event="blur" render="msg" />
+							</p:inputText>
+						</div>
+					    <div class="p-field">
+							<label for="birthDate">Data de Nascimento</label>
+							<p:datePicker id="birthDate" pattern="dd/MM/yyyy" value="#{userBean.user.birthDate}" />
+						</div>
+						<div class="p-field">
+							<label for="cpf">CPF</label>
+							<p:inputMask 
+								id="cpf" 
+								value="#{userBean.user.cpf}"
+								mask="999.999.999-99"
+								validateMask="true"
+								required="true" 
+								requiredMessage="O campo do cpf é obrigatório"
+							>
+								<f:ajax event="blur" render="msg" />
+							</p:inputMask>
+						</div>
+						<div class="p-field">
+							<label for="rg">RG</label>
+							<p:inputMask 
+								id="rg" 
+								value="#{userBean.user.rg}"
+								mask="999.999.999-9"
+								validateMask="true"
+								required="true" 
+								requiredMessage="O campo do rg é obrigatório"
+							>
+								<f:ajax event="blur" render="msg" />
+							</p:inputMask>
+						</div>
+						<div class="p-field">
+							<label for="rgDigit">Dígito do RG</label>
+							<p:inputMask 
+								id="rgDigit" 
+								value="#{userBean.user.rgDigit}"
+								mask="9"
+								validateMask="true" 
+								required="true" 
+								requiredMessage="O campo do dígito é obrigatório"
+								validatorMessage="O dígito só pode ter um número"
+							>
+								<f:ajax event="blur" render="msg" />
+								<f:validateLength maximum="1" minimum="1" />
+							</p:inputMask>
+						</div>
+						<div class="p-field">
+							<label for="image">Foto: </label>
+							<p:fileUpload 
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+								mode="simple" 
+								id="image"
+								skinSimple="true"
+								value="#{userBean.image}" 
+							/>
+						</div>
+					</div>
+					<f:facet name="footer">
+						<p:commandButton icon="pi pi-save" value="Cadastrar"
+							action="#{userBean.save()}" />
+					</f:facet>
+				</p:card>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html> 
